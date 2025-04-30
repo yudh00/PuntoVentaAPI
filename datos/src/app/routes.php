@@ -20,7 +20,3 @@
             $producto->get('/filtrar', Producto::class . ':filtrar');
         });
     });
-
-
-
-  

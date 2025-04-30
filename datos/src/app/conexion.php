@@ -13,7 +13,8 @@ $container ->set('base_datos',function(ContainerInterface $c) {
 
     try {
         $con = new PDO($dsn,$conf->usr,$conf->passw,$opc);
-        //die("Conectado a la base de datos");
+        // die("Conectado a la base de datos");
+
 
     } catch (PDOException $e) {
         print ('Error de conexión: ' . $e->getMessage(). '<br>');

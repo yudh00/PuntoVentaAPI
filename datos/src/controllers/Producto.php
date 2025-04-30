@@ -69,7 +69,16 @@
               };
                 $params= substr($params, 0, -2);
 
-       
+              /*
+              $valores="";  
+              foreach($body as $key => $value){
+                $valores .= $value.', ';
+              };
+              $valores= substr($valores, 0, -2);
+              */
+
+            
+ 
             $sql = "INSERT INTO productos ( $campos) VALUES($params);";
            
 
@@ -87,12 +96,7 @@
                 $query->bindValue($key, $value, $TIPO);
             };
 
-            try{
-                $query->execute();
-                $status= 201;
-            }catch(\PDOException $e){
-                $status= 409;
-            }
+            $query->execute();
             $status= $query->rowCount()> 0 ? 201 : 409;
 
             $query=null;
@@ -101,35 +105,36 @@
 
             return $response ->withStatus($status);
         }
-
         public function update(Request $request, Response $response, $args){
+            
             $body= json_decode($request->getBody());
-            $id= $args['id'];
 
+           
 
-            if(isset($body->id)){
+            $campos="";
+            $id = $args["id"];
+           
+            
+           if(isset($body->id)){
                 unset($body->id);
             }
             if(isset($body->codigo_producto)){
                 unset($body->codigo_producto);
             }
-
-            //var_dump($body);
-            //die();
-
-
-        
-        
-            $sql = "UPDATE  productos SET ";
+            
+ 
+            $sql = "UPDATE productos SET ";
             foreach($body as $key => $value){
-                $sql .= "$key  = :$key, ";
-              }
+            $sql .="$key = :$key, ";
+            }
             $sql= substr($sql, 0, -2);
-            $sql .= " WHERE id = :id;";
-           // die($sql);
+            $sql .=" WHERE id = :id;";
+           
 
             $con=  $this->container->get('base_datos');
             $query = $con->prepare($sql);
+
+
 
             
             foreach($body as $key => $value){
@@ -139,12 +144,10 @@
 
                 $query->bindValue($key, $value, $TIPO);
             };
-
             $query->bindValue('id', $id, PDO::PARAM_INT);
 
             $query->execute();
-
-            $status= $query->rowCount() > 0 ? 201 : 204;
+            $status= $query->rowCount() > 0 ? 200 : 204;
 
             $query=null;
             $con=null;
@@ -153,52 +156,51 @@
             return $response ->withStatus($status);
         }
 
+        
         public function delete(Request $request, Response $response, $args){
             
-
-            $sql = "DELETE FROM productos WHERE id = :id;";
+            $sql =" DELETE FROM productos WHERE id = :id;";
+            
             $con=  $this->container->get('base_datos');
 
             $query = $con->prepare($sql);
- 
-            $query->bindValue('id', $args['id'], PDO::PARAM_INT);
+
+            $query->bindValue("id", $args["id"], PDO::PARAM_INT);
             $query->execute();
-              
+            
             $status= $query->rowCount()> 0 ? 200 : 404;
- 
+
             $query=null;
             $con=null;
- 
-            return $response ->withStatus($status);
+
+
+           
+            return $response->withStatus($status);
         }
 
         public function filtrar(Request $request, Response $response, $args){
+           
             $datos= $request->getQueryParams();
-
-            //echo "<pre>";
-           // var_dump($datos);
-            //echo "</pre>";
-            //die();
-
+          
             $sql= "SELECT * FROM productos WHERE ";
             foreach($datos as $key => $value){
-                $sql .= "$key LIKE :$key AND ";     
-            }
-            $sql= rtrim($sql, 'AND '). ";";
-            //die($sql);
-
-
+                $sql .="$key LIKE :$key AND ";
+            };
+            $sql= rtrim($sql, ' AND ') . ";";
+            
+            
             //$sql .=" LIMIT 0,5;";
-
+            
             $con=  $this->container->get('base_datos');
             $query = $con->prepare($sql);
 
             foreach($datos as $key => $value){
-               $query->bindValue(":$key", "%$value%", PDO::PARAM_STR);
-            }
+                $query->bindValue(":$key", "%$value%", PDO::PARAM_STR);
 
-            $query->execute();
-            
+            };
+
+
+                $query->execute();
             $res= $query->fetchAll();
 
             $status= $query->rowCount()> 0 ? 200 : 204;
@@ -214,7 +216,6 @@
                 ->withHeader('Content-Type', 'application/json')
                 ->withStatus($status);
         }
-
 
 
     }
