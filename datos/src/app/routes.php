@@ -14,18 +14,13 @@
     $app->group('/api',function(RouteCollectorProxy $api){
         $api->group('/producto',function(RouteCollectorProxy $producto){
             $producto->get('/read[/{id}]', Producto::class . ':read');
-            $producto->post('/create', Producto::class . ':create');
+            $producto->post('', Producto::class . ':create');
+            $producto->put('/{id}', Producto::class . ':update');
+            $producto->delete('/{id}', Producto::class . ':delete');
+            $producto->get('/filtrar', Producto::class . ':filtrar');
         });
     });
 
 
 
-    $app->get('/producto', function (Request $request, Response $response, $args) {
-        $response->getBody()->write("Accediendo al producto");
-        return $response;
-    });
-    
-    $app->get('/producto/read', function (Request $request, Response $response, $args) {
-        $response->getBody()->write("Accediendo al producto");
-        return $response;
-    });
+  
