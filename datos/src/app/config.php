@@ -5,8 +5,7 @@ $container->set('config_bd',function(){
         "db"=> "ventas",
         "usr"=> "root",
         "passw"=>"12345",
-        "charset"=> "utf8mb4"
-
+        "charset"=> "utf8mb3"
     ];
 }
 );

@@ -1,5 +1,4 @@
 -- use ventas;
-
 -- Create table Articulo(
 --     id_articulo int primary key auto_increment,
 --     cod varchar(50) not null,
@@ -32,26 +31,26 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `sistema-pos`
+-- Base de datos: sistema-pos
 --
 
 --
--- Estructura de tabla para la tabla `categorias`
+-- Estructura de tabla para la tabla categorias
 --
 
-CREATE TABLE `categorias` (
-  `id_categoria` int(11) NOT NULL,
-  `nombre_categoria` text COLLATE utf8_spanish_ci DEFAULT NULL,
-  `aplica_peso` int(11) NOT NULL,
-  `fecha_creacion_categoria` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `fecha_actualizacion_categoria` date DEFAULT NULL
+CREATE TABLE categorias (
+  id_categoria int(11) NOT NULL,
+  nombre_categoria text COLLATE utf8_spanish_ci DEFAULT NULL,
+  aplica_peso int(11) NOT NULL,
+  fecha_creacion_categoria timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  fecha_actualizacion_categoria date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `categorias`
+-- Volcado de datos para la tabla categorias
 --
 
-INSERT INTO `categorias` (`id_categoria`, `nombre_categoria`, `aplica_peso`, `fecha_creacion_categoria`, `fecha_actualizacion_categoria`) VALUES
+INSERT INTO categorias (id_categoria, nombre_categoria, aplica_peso, fecha_creacion_categoria, fecha_actualizacion_categoria) VALUES
 (1, 'Galletas', 0, '2021-10-03 05:00:00', '2021-10-03'),
 (2, 'Golosina', 0, '2021-10-03 05:00:00', '2021-10-03'),
 (3, 'Wafer', 0, '2021-10-03 05:00:00', '2021-10-03'),
@@ -80,53 +79,53 @@ INSERT INTO `categorias` (`id_categoria`, `nombre_categoria`, `aplica_peso`, `fe
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `empresa`
+-- Estructura de tabla para la tabla empresa
 --
 
-CREATE TABLE `empresa` (
-  `id_empresa` int(11) NOT NULL,
-  `razon_social` text NOT NULL,
-  `ruc` bigint(20) NOT NULL,
-  `direccion` text NOT NULL,
-  `marca` text NOT NULL,
-  `serie_boleta` varchar(4) NOT NULL,
-  `nro_correlativo_venta` varchar(8) NOT NULL,
-  `email` text NOT NULL
+CREATE TABLE empresa (
+  id_empresa int(11) NOT NULL,
+  razon_social text NOT NULL,
+  ruc bigint(20) NOT NULL,
+  direccion text NOT NULL,
+  marca text NOT NULL,
+  serie_boleta varchar(4) NOT NULL,
+  nro_correlativo_venta varchar(8) NOT NULL,
+  email text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `empresa`
+-- Volcado de datos para la tabla empresa
 --
 
-INSERT INTO `empresa` (`id_empresa`, `razon_social`, `ruc`, `direccion`, `marca`, `serie_boleta`, `nro_correlativo_venta`, `email`) VALUES
+INSERT INTO empresa (id_empresa, razon_social, ruc, direccion, marca, serie_boleta, nro_correlativo_venta, email) VALUES
 (1, 'Maga & Tito Market', 10467291241, 'Avenida Brasil 1347 - Jesus María', 'Maga & Tito Market', '0002', '00000024', 'magaytito@gmail.com');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `productos`
+-- Estructura de tabla para la tabla productos
 --
 
-CREATE TABLE `productos` (
-  `id` int(11) NOT NULL,
-  `codigo_producto` bigint(13) NOT NULL,
-  `id_categoria_producto` int(11) DEFAULT NULL,
-  `descripcion_producto` text COLLATE utf8_spanish_ci DEFAULT NULL,
-  `precio_compra_producto` float NOT NULL,
-  `precio_venta_producto` float NOT NULL,
-  `utilidad` float NOT NULL,
-  `stock_producto` float DEFAULT NULL,
-  `minimo_stock_producto` float DEFAULT NULL,
-  `ventas_producto` float DEFAULT NULL,
-  `fecha_creacion_producto` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `fecha_actualizacion_producto` date DEFAULT NULL
+CREATE TABLE productos (
+  id int(11) NOT NULL,
+  codigo_producto bigint(13) NOT NULL,
+  id_categoria_producto int(11) DEFAULT NULL,
+  descripcion_producto text COLLATE utf8_spanish_ci DEFAULT NULL,
+  precio_compra_producto float NOT NULL,
+  precio_venta_producto float NOT NULL,
+  utilidad float NOT NULL,
+  stock_producto float DEFAULT NULL,
+  minimo_stock_producto float DEFAULT NULL,
+  ventas_producto float DEFAULT NULL,
+  fecha_creacion_producto timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  fecha_actualizacion_producto date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `productos`
+-- Volcado de datos para la tabla productos
 --
 
-INSERT INTO `productos` (`id`, `codigo_producto`, `id_categoria_producto`, `descripcion_producto`, `precio_compra_producto`, `precio_venta_producto`, `utilidad`, `stock_producto`, `minimo_stock_producto`, `ventas_producto`, `fecha_creacion_producto`, `fecha_actualizacion_producto`) VALUES
+INSERT INTO productos (id, codigo_producto, id_categoria_producto, descripcion_producto, precio_compra_producto, precio_venta_producto, utilidad, stock_producto, minimo_stock_producto, ventas_producto, fecha_creacion_producto, fecha_actualizacion_producto) VALUES
 (1, 7755139002809, 8, 'Paisana extra 5k', 18.29, 20, 1.71, 2, 0, 4, '2021-10-24 22:27:45', '0000-00-00'),
 (2, 7751271027656, 9, 'Gloria Fresa 500ml', 3.79, 5, 1.21, 6, 3, 0, '0000-00-00 00:00:00', '0000-00-00'),
 (3, 7751271021999, 7, 'Gloria evaporada ligth 400g', 3.4, 5, 1.6, 24, 12, 0, '0000-00-00 00:00:00', '0000-00-00'),
@@ -230,24 +229,24 @@ INSERT INTO `productos` (`id`, `codigo_producto`, `id_categoria_producto`, `desc
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `venta_cabecera`
+-- Estructura de tabla para la tabla venta_cabecera
 --
 
-CREATE TABLE `venta_cabecera` (
-  `id_boleta` int(11) NOT NULL,
-  `nro_boleta` varchar(8) NOT NULL,
-  `descripcion` text DEFAULT NULL,
-  `subtotal` float NOT NULL,
-  `igv` float NOT NULL,
-  `total_venta` float DEFAULT NULL,
-  `fecha_venta` timestamp NULL DEFAULT current_timestamp()
+CREATE TABLE venta_cabecera (
+  id_boleta int(11) NOT NULL,
+  nro_boleta varchar(8) NOT NULL,
+  descripcion text DEFAULT NULL,
+  subtotal float NOT NULL,
+  igv float NOT NULL,
+  total_venta float DEFAULT NULL,
+  fecha_venta timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `venta_cabecera`
+-- Volcado de datos para la tabla venta_cabecera
 --
 
-INSERT INTO `venta_cabecera` (`id_boleta`, `nro_boleta`, `descripcion`, `subtotal`, `igv`, `total_venta`, `fecha_venta`) VALUES
+INSERT INTO venta_cabecera (id_boleta, nro_boleta, descripcion, subtotal, igv, total_venta, fecha_venta) VALUES
 (46, '00000014', 'Venta realizada con Nro Boleta: 00000014', 0, 0, 69, '2021-10-18 21:54:10'),
 (47, '00000015', 'Venta realizada con Nro Boleta: 00000015', 0, 0, 17.5, '2021-10-18 22:34:17'),
 (48, '00000016', 'Venta realizada con Nro Boleta: 00000016', 0, 0, 16.2, '2021-10-18 22:34:51'),
@@ -263,23 +262,23 @@ INSERT INTO `venta_cabecera` (`id_boleta`, `nro_boleta`, `descripcion`, `subtota
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `venta_detalle`
+-- Estructura de tabla para la tabla venta_detalle
 --
 
-CREATE TABLE `venta_detalle` (
-  `id` int(11) NOT NULL,
-  `nro_boleta` varchar(8) COLLATE utf8_spanish_ci NOT NULL,
-  `codigo_producto` bigint(20) NOT NULL,
-  `cantidad` float NOT NULL,
-  `total_venta` float NOT NULL,
-  `fecha_venta` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+CREATE TABLE venta_detalle (
+  id int(11) NOT NULL,
+  nro_boleta varchar(8) COLLATE utf8_spanish_ci NOT NULL,
+  codigo_producto bigint(20) NOT NULL,
+  cantidad float NOT NULL,
+  total_venta float NOT NULL,
+  fecha_venta timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `venta_detalle`
+-- Volcado de datos para la tabla venta_detalle
 --
 
-INSERT INTO `venta_detalle` (`id`, `nro_boleta`, `codigo_producto`, `cantidad`, `total_venta`, `fecha_venta`) VALUES
+INSERT INTO venta_detalle (id, nro_boleta, codigo_producto, cantidad, total_venta, fecha_venta) VALUES
 (521, '00000014', 7755139002809, 3, 69, '2021-10-18 21:54:10'),
 (522, '00000015', 7754725000281, 5, 17.5, '2021-10-18 22:34:17'),
 (523, '00000016', 7751271021975, 1, 3.3, '2021-10-18 22:34:51'),
@@ -410,70 +409,89 @@ INSERT INTO `venta_detalle` (`id`, `nro_boleta`, `codigo_producto`, `cantidad`, 
 --
 
 --
--- Indices de la tabla `categorias`
+-- Indices de la tabla categorias
 --
-ALTER TABLE `categorias`
-  ADD PRIMARY KEY (`id_categoria`);
+
+
+CREATE TABLE usuario (
+    id int NOT NULL,
+    id_usuario varchar(15) NOT NULL,
+    correo varchar(100) NOT NULL,
+    rol int NOT NULL,
+    passw varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+    ultimoAcceso datetime DEFAULT null,
+    tkR varchar(255) NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+
+ALTER TABLE usuario
+  ADD PRIMARY KEY (id),
+  ADD UNIQUE KEY idx_Usuario (id_usuario);
+
+ALTER TABLE usuario
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT;
+  
+ALTER TABLE categorias
+  ADD PRIMARY KEY (id_categoria);
 
 --
--- Indices de la tabla `empresa`
+-- Indices de la tabla empresa
 --
-ALTER TABLE `empresa`
-  ADD PRIMARY KEY (`id_empresa`);
+ALTER TABLE empresa
+  ADD PRIMARY KEY (id_empresa);
 
 --
--- Indices de la tabla `productos`
+-- Indices de la tabla productos
 --
-ALTER TABLE `productos`
-  ADD PRIMARY KEY (`id`,`codigo_producto`);
+ALTER TABLE productos
+  ADD PRIMARY KEY (id,codigo_producto);
 
 --
--- Indices de la tabla `venta_cabecera`
+-- Indices de la tabla venta_cabecera
 --
-ALTER TABLE `venta_cabecera`
-  ADD PRIMARY KEY (`id_boleta`);
+ALTER TABLE venta_cabecera
+  ADD PRIMARY KEY (id_boleta);
 
 --
--- Indices de la tabla `venta_detalle`
+-- Indices de la tabla venta_detalle
 --
-ALTER TABLE `venta_detalle`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE venta_detalle
+  ADD PRIMARY KEY (id);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT de la tabla `categorias`
+-- AUTO_INCREMENT de la tabla categorias
 --
-ALTER TABLE `categorias`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+ALTER TABLE categorias
+  MODIFY id_categoria int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
--- AUTO_INCREMENT de la tabla `empresa`
+-- AUTO_INCREMENT de la tabla empresa
 --
-ALTER TABLE `empresa`
-  MODIFY `id_empresa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE empresa
+  MODIFY id_empresa int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT de la tabla `productos`
+-- AUTO_INCREMENT de la tabla productos
 --
-ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+ALTER TABLE productos
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
--- AUTO_INCREMENT de la tabla `venta_cabecera`
+-- AUTO_INCREMENT de la tabla venta_cabecera
 --
-ALTER TABLE `venta_cabecera`
-  MODIFY `id_boleta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+ALTER TABLE venta_cabecera
+  MODIFY id_boleta int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
--- AUTO_INCREMENT de la tabla `venta_detalle`
+-- AUTO_INCREMENT de la tabla venta_detalle
 --
-ALTER TABLE `venta_detalle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=645;
+ALTER TABLE venta_detalle
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=645;
 COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT*/;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS*/;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION*/;

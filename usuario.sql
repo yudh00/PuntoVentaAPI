@@ -1,5 +1,5 @@
 CREATE TABLE usuario (
-    rol INT NOT NULL,
+    rol INT NOT NULL PRIMARY KEY,
     passw VARCHAR(255) CHARACTER_SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
     ultimmoAcceso DATETIME DEFAULT NULL,
     tkR VARCHAR(255)
