@@ -9,7 +9,7 @@ services:
     image: mysql:latest #Busca una imagen para descargar
     container_name: base_datos #Nombre para nuestro contenedor
     environment: #Maneja variables de entorno
-       MYSQL_DATABASE: ventas #Nombre que se le da a la bd
+       MYSQL_DATABASE: taller #Nombre que se le da a la bd
       # - MYSQL_ROOT_PASSWORD=/run/secrets/db_password
        MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_password
     ports: #Puertos locales
